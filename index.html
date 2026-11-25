@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System Status</title>
+</head>
+<body>
+  <h2 id="sBan">System Status</h2>
+  <button id="cBut">Check Status</button>
+  <script>
+    alert("Welcome to the System Status Checker!");
+    const sBan = document.getElementById("sBan")
+    const cBut = document.getElementById("cBut")
+    const uBan = (message, color) => {
+      sBan.innerText = message
+      sBan.style.backgroundColor = color}
+    const cStat = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const isOnline = Math.random() >= 0.5
+          if (isOnline){
+            resolve("Online")} 
+          else{
+            resolve("Offline")}
+        }, 2000)
+      })}
+    cBut.addEventListener("click", () => {
+      uBan("System is Checking...", "yellow")
+      cStat().then((status) => {
+        if (status === "Online") {
+          uBan("System is Online", "green")}
+        else{
+          uBan("System is Offline", "red")}
+      })
+    })
+  </script>
+</body>
+</html>
