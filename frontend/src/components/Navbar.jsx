@@ -1,23 +1,28 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 function Navbar() {
   return (
-    <nav className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-      <div className="w-64">
-        <h1 className="text-xl font-bold text-gray-900">Freelancer's Hub</h1>
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+      <div className="px-6 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+            Freelancer's Hub
+          </h1>
+        </div>
+        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
+          <span className="text-blue-600 font-semibold cursor-pointer">Dashboard</span>
+          <span className="hover:text-blue-600 cursor-pointer">Find Freelancers</span>
+          <span className="hover:text-blue-600 cursor-pointer">Browse Projects</span>
+          <span className="hover:text-blue-600 cursor-pointer">Vendors</span>
+        </nav>
+        <div className="flex items-center">
+          <Button variant="outline" size="sm">
+            Login / Profile
+          </Button>
+        </div>
       </div>
-
-      <div className="flex items-center space-x-6 text-sm text-gray-600">
-        <span className="hover:text-blue-600 cursor-pointer">Home</span>
-        <span className="hover:text-blue-600 cursor-pointer">Find Freelancers</span>
-        <span className="hover:text-blue-600 cursor-pointer">Find Projects</span>
-        <span className="hover:text-blue-600 cursor-pointer">My Dashboard</span>
-      </div>
-
-      <button className="px-4 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50">
-        Login / Profile
-      </button>
-    </nav>
+    </header>
   );
 }
 
