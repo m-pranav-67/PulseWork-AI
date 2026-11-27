@@ -1,78 +1,47 @@
 import React from 'react';
-import StatsCard from '@/components/StatsCard';
-import TaskCard from '@/components/TaskCard';
-import ProjectSearch from '@/components/ProjectSearch';
-import { Button } from '@/components/ui/button';
-function Dashboard() {
-  const stats = [
-    { title: 'Total Projects', value: '24', description: 'Overall projects recorded' },
-    { title: 'Active Projects', value: '08', description: 'Currently ongoing tasks' },
-    { title: 'Completed Projects', value: '12', description: 'Successfully delivered' },
-    { title: 'Available Freelancers', value: '35', description: 'Ready to take on work' }
-  ];
-  const tasks = [
-    {
-      title: 'E-commerce Website Development',
-      category: 'Web Development',
-      budget: '₹15,000',
-      freelancer: 'Rahul'
-    },
-    {
-      title: 'College Management Software',
-      category: 'Software Development',
-      budget: '₹25,000',
-      freelancer: 'Not Assigned'
-    },
-    {
-      title: 'Portfolio Website Design',
-      category: 'Frontend Development',
-      budget: '₹8,000',
-      freelancer: 'Arun'
-    }
-  ];
+import { Link } from 'react-router-dom';
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import ProjectCard from '../components/ProjectCard';
 
+const Dashboard = () => {
+  const stats = [{ title: 'Total Projects', value: '12', desc: 'Overall platform projects' },{ title: 'Active Projects', value: '5', desc: 'Currently in development' },{ title: 'Completed Projects', value: '7', desc: 'Delivered successfully' }];
+  const recentProjects = [{ id: 1,title: 'E-commerce Website Development',category: 'Web Development',budget: '₹15,000',status: 'In Progress'},{ id: 2,title: 'College Management Software',category: 'Software Development',budget: '₹25,000',status: 'Open'}];
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-xl border border-gray-200">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Welcome to Freelancer's Hub!
-          </h1>
-          <p className="text-gray-600 text-sm mt-1">
-            Manage your projects, connect with talented freelancers, and track your work in one place.
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Welcome to Freelancer's Hub!</h1>
+          <p className="text-gray-600 text-sm mt-1">Connect with talented freelancers, post your projects, and track IT development work seamlessly.</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-          + Post a Project
-        </Button>
+        <Link to="/post-project"><Button className="bg-blue-600 hover:bg-blue-700 text-white font-medium">+ Post a Project</Button></Link>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, index) => (
-          <StatsCard
-            key={index}
-            title={stat.title}
-            value={stat.value}
-            description={stat.description}
-          />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {stats.map((s, index) => (
+          <Card key={index}>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-gray-500">{s.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-gray-900">{s.value}</div>
+              <p className="text-xs text-gray-400 mt-1">{s.desc}</p>
+            </CardContent>
+          </Card>
         ))}
       </div>
-      <ProjectSearch />
-      <div className="space-y-4">
-        <h2 className="text-lg font-bold text-gray-900">Projects & Tasks</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tasks.map((task, index) => (
-            <TaskCard
-              key={index}
-              title={task.title}
-              category={task.category}
-              budget={task.budget}
-              status={task.status}
-              freelancer={task.freelancer}
-            />
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-gray-900">Recent Projects</h2>
+          <Link to="/browse-projects" className="text-sm font-medium text-blue-600 hover:underline">View All &rarr;</Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {recentProjects.map((project) => (
+            <ProjectCard key={project.id}title={project.title}category={project.category}budget={project.budget}status={project.status}/>
           ))}
         </div>
       </div>
     </div>
   );
-}
+};
+
 export default Dashboard;
